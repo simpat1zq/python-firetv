@@ -11,6 +11,8 @@ import logging
 import re
 from socket import error as socket_error
 from adb import adb_commands
+from adb import sign_m2crypto
+import os.path as op
 from adb.adb_protocol import InvalidChecksumError
 
 # Matches window windows output for app & activity name gathering
@@ -104,9 +106,14 @@ class FireTV:
         Failure sets state to DISCONNECTED and disables sending actions.
         """
         try:
-            self._adb = adb_commands.AdbCommands.ConnectDevice(
-                serial=self.host)
+            # KitKat+ devices require authentication
+            signer = sign_m2crypto.M2CryptoSigner(
+                op.expanduser('~/.android/adbkey'))
+            # Connect to the device
+            device = adb_commands.AdbCommands()
+            self._adb = device.ConnectDevice(serial=self.host, rsa_keys=[signer])
         except socket_error as serr:
+            print 'Exception raised'
             if serr.errno != errno.ECONNREFUSED:
                 raise serr
 
