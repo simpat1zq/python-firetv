@@ -2,9 +2,9 @@ from setuptools import setup
 
 setup(
     name='firetv',
-    version='1.0.5',
+    version='1.0.6',
     description='Communicate with an Amazon Fire TV device via ADB over a network.',
-    url='https://github.com/happyleavesaoc/python-firetv/',
+    url='https://github.com/simpat1zq/python-firetv/',
     license='MIT',
     author='happyleaves',
     author_email='happyleaves.tfr@gmail.com',
