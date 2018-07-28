@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y \
         swig \
         curl \
         unzip \
+        python-pip \
+        pip \
         && curl -L -o /tmp/master.zip https://github.com/happyleavesaoc/python-firetv/archive/master.zip \
         && cd /tmp \
         && unzip master.zip \
